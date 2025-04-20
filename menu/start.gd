@@ -1,12 +1,14 @@
 extends Button
 
 func _on_pressed() -> void:
-	var load_scene = load("res://loadingscreen/LoadingScreen.tscn") # Đổi path nếu khác
-	var load_instance = load_scene.instantiate()
-	get_tree().get_root().add_child(load_instance)
-	
-	# Xoá scene hiện tại nếu muốn
-	get_tree().current_scene.queue_free()
+	var new_scene = load("res://main.tscn").instantiate()
+	get_tree().root.add_child(new_scene)
+
+	var current = get_tree().current_scene
+	if current:
+		current.queue_free()
+
+	get_tree().current_scene = new_scene
 
 
 func _on_out_pressed() -> void:

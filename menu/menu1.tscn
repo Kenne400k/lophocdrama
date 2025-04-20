@@ -57,4 +57,5 @@ theme_override_fonts/font = ExtResource("2_k247a")
 theme_override_font_sizes/font_size = 40
 text = "OUT"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/start" to="MarginContainer/VBoxContainer/VBoxContainer/start" method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/out" to="MarginContainer/VBoxContainer/VBoxContainer/start" method="_on_out_pressed"]

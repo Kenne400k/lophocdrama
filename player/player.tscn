@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ddm2784o1x13l"]
+[gd_scene load_steps=56 format=3 uid="uid://ddm2784o1x13l"]
 
 [ext_resource type="Script" uid="uid://byodsbloctsr4" path="res://player/player.gd" id="1_mmwog"]
 [ext_resource type="Texture2D" uid="uid://egpddb17gvm2" path="res://player/Mage/High_Jump/high_jump1.png" id="2_8pxes"]
@@ -48,10 +48,15 @@
 [ext_resource type="Texture2D" uid="uid://dayqdxmhr57xs" path="res://player/Mage/Walk/walk4.png" id="46_j3o0i"]
 [ext_resource type="Texture2D" uid="uid://by61yi13qwuay" path="res://player/Mage/Walk/walk5.png" id="47_pgo6y"]
 [ext_resource type="Texture2D" uid="uid://dtf16g6p0jw47" path="res://player/Mage/Walk/walk6.png" id="48_qm6yy"]
+[ext_resource type="Texture2D" uid="uid://eiiy2krh27rf" path="res://map/background/Day/1.png" id="49_jfgyi"]
+[ext_resource type="Texture2D" uid="uid://b3uy1ikvc1hhy" path="res://map/background/Day/2.png" id="50_237xx"]
+[ext_resource type="Texture2D" uid="uid://dr2vaip1yf008" path="res://map/background/Day/3.png" id="51_wpyo2"]
+[ext_resource type="Texture2D" uid="uid://bgtvjavfrij7x" path="res://map/background/Day/4.png" id="52_7crtr"]
+[ext_resource type="Texture2D" uid="uid://cuqpsjfjl1lxx" path="res://map/background/Day/5.png" id="53_vgvch"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kqu6x"]
-radius = 28.0
-height = 64.0
+radius = 27.0
+height = 60.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oul6g"]
 animations = [{
@@ -167,7 +172,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 9.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -226,13 +231,37 @@ animations = [{
 script = ExtResource("1_mmwog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-13, 17)
+position = Vector2(-22, 17)
 shape = SubResource("CapsuleShape2D_kqu6x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3.00003, -2)
-scale = Vector2(0.9375, 0.992188)
+[node name="container" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="container"]
 sprite_frames = SubResource("SpriteFrames_oul6g")
-animation = &"idle"
-frame = 9
-frame_progress = 0.00465863
+animation = &"walk"
+frame_progress = 0.0101934
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
+
+[node name="1" type="Sprite2D" parent="."]
+z_index = -300
+position = Vector2(-5, 0)
+scale = Vector2(1.35764, 1.34259)
+texture = ExtResource("49_jfgyi")
+
+[node name="2" type="Sprite2D" parent="1"]
+texture = ExtResource("50_237xx")
+
+[node name="3" type="Sprite2D" parent="1/2"]
+position = Vector2(3.68286, 2.38419e-07)
+scale = Vector2(1.00347, 0.984568)
+texture = ExtResource("51_wpyo2")
+
+[node name="4" type="Sprite2D" parent="1/2/3"]
+position = Vector2(-0.996536, 2.53918)
+scale = Vector2(0.99654, 1.01567)
+texture = ExtResource("52_7crtr")
+
+[node name="5" type="Sprite2D" parent="1/2/3/4"]
+texture = ExtResource("53_vgvch")
