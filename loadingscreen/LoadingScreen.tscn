@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1qb5y86p42fu"]
+
+[ext_resource type="Script" uid="uid://8f1ssukorw1n" path="res://loadingscreen/loading_screen.gd" id="1_0ng43"]
+[ext_resource type="Texture2D" uid="uid://bbe1g5ybev2nc" path="res://background/istockphoto-1404046691-170667a.jpg" id="1_hvqrk"]
+[ext_resource type="FontFile" uid="uid://dd2cl8wh3adov" path="res://font/Backso.ttf" id="2_0ng43"]
+
+[sub_resource type="GDScript" id="GDScript_pg0v7"]
+script/source = "extends CanvasLayer
+
+signal loading_screen_done
+
+@onready var bar = $ProgressBar
+@onready var anim = $AnimationPlayer
+
+func _ready():
+	anim.play(\"intro\")
+	Loader.load_scene_async(\"res://gme.tscn\")
+	Loader.progress_changed.connect(_on_progress)
+	Loader.done_loading.connect(_on_done)
+
+func _on_progress(p):
+	bar.value = p * 100
+
+func _on_done(scene):
+	anim.play(\"outro\")
+	await anim.animation_finished
+	emit_signal(\"loading_screen_done\", scene)
+"
+
+[sub_resource type="Animation" id="Animation_hvqrk"]
+resource_name = "in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0ng43"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pg0v7"]
+resource_name = "out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afg73"]
+_data = {
+&"RESET": SubResource("Animation_0ng43"),
+&"in": SubResource("Animation_hvqrk"),
+&"out": SubResource("Animation_pg0v7")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_0ng43")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_pg0v7")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_right = 1923.0
+offset_bottom = 1081.0
+texture = ExtResource("1_hvqrk")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 828.0
+offset_top = 962.0
+offset_right = 1097.0
+offset_bottom = 1027.0
+theme_override_fonts/font = ExtResource("2_0ng43")
+theme_override_font_sizes/font_size = 50
+text = "LOADING"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1925.0
+offset_bottom = 1088.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_afg73")
+}

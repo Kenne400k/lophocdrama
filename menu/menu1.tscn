@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceckrquvfvpdn"]
+
+[ext_resource type="Texture2D" uid="uid://bbe1g5ybev2nc" path="res://background/istockphoto-1404046691-170667a.jpg" id="1_0fw08"]
+[ext_resource type="FontFile" uid="uid://dd2cl8wh3adov" path="res://font/Backso.ttf" id="2_k247a"]
+[ext_resource type="Script" uid="uid://d3ilxy4x1t7cs" path="res://menu/start.gd" id="3_k247a"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960.5, 544.5)
+scale = Vector2(3.43548, 3.49838)
+texture = ExtResource("1_0fw08")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 315.0
+offset_right = 1238.0
+offset_bottom = 780.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 34
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k247a")
+theme_override_font_sizes/font_size = 50
+text = "LOP HOC DRAMA"
+horizontal_alignment = 1
+
+[node name="start" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k247a")
+theme_override_font_sizes/font_size = 40
+text = "START"
+script = ExtResource("3_k247a")
+
+[node name="setting" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k247a")
+theme_override_font_sizes/font_size = 40
+text = "SETTING"
+
+[node name="out" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_k247a")
+theme_override_font_sizes/font_size = 40
+text = "OUT"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/out" to="MarginContainer/VBoxContainer/VBoxContainer/start" method="_on_out_pressed"]

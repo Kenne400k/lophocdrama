@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc1rb6pvw2p0k"]
+
+[ext_resource type="Script" uid="uid://2mwkyi68ch62" path="res://intro.gd" id="1_jkt4n"]
+[ext_resource type="Texture2D" uid="uid://di6w07sipcx0t" path="res://intro/ChatGPT Image 11_56_03 19 thg 4, 2025.png" id="2_vjsr4"]
+
+[sub_resource type="Animation" id="Animation_vyos2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pxqmo"]
+resource_name = "black_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.00326),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1q7h5"]
+resource_name = "black_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.00386, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5lnx"]
+_data = {
+&"RESET": SubResource("Animation_vyos2"),
+&"black_in": SubResource("Animation_pxqmo"),
+&"black_out": SubResource("Animation_1q7h5")
+}
+
+[node name="intro" type="Node2D"]
+script = ExtResource("1_jkt4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(959.999, 538.25)
+scale = Vector2(1.875, 1.86742)
+texture = ExtResource("2_vjsr4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 1918.0
+offset_bottom = 1079.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a5lnx")
+}
